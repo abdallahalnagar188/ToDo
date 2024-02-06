@@ -1,16 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_green"
     tools:context=".MainActivity">
-    <TextView
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_app_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="abdallah alnagar"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        style="@style/Widget.MaterialComponents.BottomAppBar"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="8dp"
+        app:fabCradleVerticalOffset="6dp"
+        android:backgroundTint="@color/white">
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00FFFFFF"
+            android:elevation="0dp"
+            style="@style/Widget.MaterialComponents.BottomNavigationView"
+            app:menu="@menu/bottom_nav_menu"
+            app:itemIconTint="@color/bottom_nav_selector"
+            />
+    </com.google.android.material.bottomappbar.BottomAppBar>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue"
+        android:background="@color/white"
+        android:tint="@color/white"
+        android:src="@drawable/ic_add"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        app:layout_anchor="@id/bottom_app_bar"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

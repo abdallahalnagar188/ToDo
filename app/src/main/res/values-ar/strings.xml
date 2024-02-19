@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ToDo</string>
+    <string-array name="language">
+        <item>اللغة الانجليزيه</item>
+        <item>اللغة العربيه</item>
+    </string-array>
+    <string-array name="mode">
+        <item>الوضع المضئ</item>
+        <item>الوضع الليلي</item>
+    </string-array>
+    <string name="add_todo_title">اضافة مهمه</string>
+    <string name="enter_your_todo_title_her">اكتب عنوانا</string>
+    <string name="enter_your_descripion_her">اكتب وصفا</string>
+    <string name="select_time">اختيار التوقيت</string>
+    <string name="add">اضافة</string>
+    <string name="title_required">العنوان مطلوب</string>
+    <string name="description_required">الوصف مطلوب</string>
+</resources>

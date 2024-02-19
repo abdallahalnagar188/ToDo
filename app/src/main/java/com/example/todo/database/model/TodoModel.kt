@@ -7,18 +7,18 @@ import java.util.Date
 
 @Entity
 data class TodoModel(
-    @ColumnInfo(name = "ID")
+    @ColumnInfo
     @PrimaryKey(autoGenerate = true)
-    val id :Int? = null,
+    val id:Int? = null,
 
     @ColumnInfo
-    val title :String? = null,
+    val title:String? = null,
 
     @ColumnInfo
-    val description : String? = null,
+    val description: String? = null,
 
     @ColumnInfo
-    val isDone : Boolean? = false,
+    val isDone: Boolean? = false,
 
     @ColumnInfo
     val time: Date? = null

@@ -4,18 +4,21 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.todo.database.model.DateConverter
 import com.example.todo.database.dao.TodoDao
 import com.example.todo.database.model.TodoModel
 
-@Database(entities = [TodoModel::class], version = 1)
-abstract class TodoDatabase private constructor():RoomDatabase() {
+@Database(entities = [TodoModel::class], version = 2)
+@TypeConverters(DateConverter::class)
+abstract class TodoDatabase :RoomDatabase() {
 
     abstract fun getTodoDao():TodoDao
     companion object{
         private const val DATABASE_NAME = "Todos Database"
         private var todoDatabaseInstance : TodoDatabase? = null
         fun getInstance(context:Context):TodoDatabase{
-            if (todoDatabaseInstance == null)
+            if (todoDatabaseInstance == null) {
                 todoDatabaseInstance = Room.databaseBuilder(
                     context.applicationContext,
                     TodoDatabase::class.java,
@@ -24,8 +27,8 @@ abstract class TodoDatabase private constructor():RoomDatabase() {
                     .fallbackToDestructiveMigration()
                     .allowMainThreadQueries()
                     .build()
+            }
             return todoDatabaseInstance!!
         }
     }
-
 }

@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.todo.databinding.ActivityMainBinding
-import com.example.todo.taps.AddTodoBottomSheetFragment
-import com.example.todo.taps.SettingFragment
-import com.example.todo.taps.TodosListFragment
+import com.example.todo.taps.addTodo.AddTodoBottomSheetFragment
+import com.example.todo.taps.settings.SettingFragment
+import com.example.todo.taps.todoList.TodosListFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding

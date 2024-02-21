@@ -1,65 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tool="http://schemas.android.com/tools"
-    android:layout_margin="8dp"
-    android:background="@drawable/item_todo_bg_style"
-    android:padding="4dp"
-    >
+    xmlns:tool="http://schemas.android.com/tools">
 
+    <data>
 
-    <View
-        android:id="@+id/line_vertical"
-        android:layout_width="4dp"
-        android:layout_height="70dp"
-        android:layout_marginVertical="8dp"
-        android:layout_marginHorizontal="16dp"
-        android:background="@color/blue"
-        android:padding="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <variable
+            name="todoItem"
+            type="com.example.todo.database.model.TodoModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/todo_title"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:textColor="@color/blue"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/todo_check"
-        app:layout_constraintStart_toEndOf="@+id/line_vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        tool:text="play football" />
-
-    <TextView
-        android:id="@+id/todo_time_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ico_clock"
-        android:drawablePadding="6dp"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/todo_title"
-        app:layout_constraintTop_toBottomOf="@id/todo_title"
-        tool:text="10:30 PM" />
-
-    <ImageView
-        android:id="@+id/todo_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_check_bg"
-        android:src="@drawable/ic_check"
-        android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp"
-        android:layout_marginEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_margin="8dp"
+        android:background="@drawable/item_todo_bg_style"
+        android:padding="4dp">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/line_vertical"
+            android:layout_width="4dp"
+            android:layout_height="70dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:background="@color/blue"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/todo_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="@{todoItem.title}"
+            app:layout_constraintEnd_toStartOf="@+id/todo_check"
+            app:layout_constraintStart_toEndOf="@+id/line_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            tool:text="play football" />
+
+        <TextView
+            android:id="@+id/todo_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ico_clock"
+            android:drawablePadding="6dp"
+            android:textSize="16sp"
+            android:text="@{todoItem.time.toString()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/todo_title"
+            app:layout_constraintTop_toBottomOf="@id/todo_title"
+            tool:text="10:30 PM" />
+
+        <ImageView
+            android:id="@+id/todo_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/ic_check_bg"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:src="@drawable/ic_check"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

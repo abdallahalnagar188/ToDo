@@ -11,7 +11,7 @@
     </string-array>
     <string name="add_todo_title">اضافة مهمه</string>
     <string name="enter_your_todo_title_her">اكتب عنوانا</string>
-    <string name="enter_your_descripion_her">اكتب وصفا</string>
+    <string name="enter_your_description_her">اكتب وصفا</string>
     <string name="select_time">اختيار التوقيت</string>
     <string name="add">اضافة</string>
     <string name="title_required">العنوان مطلوب</string>

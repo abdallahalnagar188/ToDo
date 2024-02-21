@@ -17,7 +17,7 @@ abstract class TodoDatabase :RoomDatabase() {
     companion object{
         private const val DATABASE_NAME = "Todos Database"
         private var todoDatabaseInstance : TodoDatabase? = null
-        fun getInstance(context:Context):TodoDatabase{
+        fun init(context: Context){
             if (todoDatabaseInstance == null) {
                 todoDatabaseInstance = Room.databaseBuilder(
                     context.applicationContext,
@@ -28,6 +28,9 @@ abstract class TodoDatabase :RoomDatabase() {
                     .allowMainThreadQueries()
                     .build()
             }
+        }
+        fun getInstance():TodoDatabase{
+
             return todoDatabaseInstance!!
         }
     }

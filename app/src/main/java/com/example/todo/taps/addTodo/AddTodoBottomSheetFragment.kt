@@ -1,30 +1,40 @@
-package com.example.todo.taps
+package com.example.todo.taps.addTodo
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.get
 import com.example.todo.R
 import com.example.todo.database.TodoDatabase
 import com.example.todo.database.model.TodoModel
 import com.example.todo.databinding.FragmentAddTodoBottomSheetBinding
+import com.example.todo.taps.todoList.TodosListFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.util.Calendar
 
 class AddTodoBottomSheetFragment : BottomSheetDialogFragment() {
     private lateinit var binding: FragmentAddTodoBottomSheetBinding
     lateinit var calendar: Calendar
+    lateinit var viewModel:AddTodoViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentAddTodoBottomSheetBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this).get(AddTodoViewModel::class.java)
+        binding.viewModel = viewModel
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         calendar = Calendar.getInstance()
@@ -36,51 +46,24 @@ class AddTodoBottomSheetFragment : BottomSheetDialogFragment() {
             showDatePicker()
         }
         binding.btnAddTodo.setOnClickListener {
-            addTodoToDatabase()
+            viewModel.addTodoToDatabase(calendar = calendar) {
+                TodosListFragment.adapter.notifyDataSetChanged()
+                dismiss()
+            }
         }
+        subscribeToLiveData()
     }
 
-    private fun validateFields(): Boolean {
-        var validate = true
-        if (
-            binding.titleEditText.text.toString().isEmpty() ||
-            binding.titleEditText.text.toString().isBlank()
-        ) {
-            binding.titleEditText.error = getString(R.string.title_required)
-            validate = false
-        }
-        if (
-            binding.descriptionEditText.text.toString().isEmpty() ||
-            binding.descriptionEditText.text.toString().isBlank()
-        ) {
-            binding.descriptionEditText.error = getString(R.string.description_required)
-            validate = false
-        }
-        return validate
+    private fun subscribeToLiveData() {
+        viewModel.title.observe(this,object :Observer<String>{
+            override fun onChanged(value: String) {
+                Log.e("TAG","onChanged: $value")
+            }
+
+        })
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    private fun addTodoToDatabase() {
-        calendar.clear(Calendar.HOUR)
-        calendar.clear(Calendar.MINUTE)
-        calendar.clear(Calendar.SECOND)
-        calendar.clear(Calendar.MILLISECOND)
-        if (validateFields()) {
-            val title = binding.titleEditText.text.toString()
-            val description = binding.descriptionEditText.text.toString()
-            TodoDatabase.getInstance(requireContext()).getTodoDao().insertTodo(
-                TodoModel(
-                    title = title,
-                    description = description,
-                    isDone = false,
-                    time = calendar.time
-                )
-            )
-//            Log.e("calendar",calendar.time.toString())
-            TodosListFragment.adapter.notifyDataSetChanged()
-            dismiss()
-        }
-    }
+
 
     @SuppressLint("SetTextI18n")
     private fun showDatePicker() {

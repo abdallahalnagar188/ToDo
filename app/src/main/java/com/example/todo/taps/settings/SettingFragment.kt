@@ -1,4 +1,4 @@
-package com.example.todo.taps
+package com.example.todo.taps.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -56,12 +56,9 @@ class SettingFragment : Fragment() {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)}
 
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
-
         }
-
 
     }
 

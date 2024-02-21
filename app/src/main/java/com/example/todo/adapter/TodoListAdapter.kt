@@ -9,34 +9,39 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.todo.R
 import com.example.todo.database.model.TodoModel
+import com.example.todo.databinding.ItemTodoBinding
 
-class TodoListAdapter( var todoList: List<TodoModel>? = null):
+class TodoListAdapter(var todoList: List<TodoModel>? = null) :
     Adapter<TodoListAdapter.TodoListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoListViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_todo,parent,false)
-        return TodoListViewHolder(view)
+        val itemTodoBinding =
+            ItemTodoBinding.inflate(LayoutInflater.from(parent.context), parent     , false)
+        return TodoListViewHolder(itemTodoBinding)
     }
 
     override fun getItemCount(): Int {
-        return todoList?.size?:0
+        return todoList?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: TodoListViewHolder, position: Int) {
         val item = todoList?.get(position)
-        holder.title.text = item?.title
-        holder.time.text = item?.time.toString()
+        holder.bind(item ?: return)
 
     }
-    fun updateData(todoList: List<TodoModel>?){
-        this.todoList= todoList
+
+    fun updateData(todoList: List<TodoModel>?) {
+        this.todoList = todoList
         notifyDataSetChanged()
     }
 
-    class TodoListViewHolder(view: View) : ViewHolder(view){
-        val title :TextView = view.findViewById(R.id.todo_title)
-        val time :TextView = view.findViewById(R.id.todo_time_tv)
-        val imageCheck :ImageView = view.findViewById(R.id.todo_check)
+    class TodoListViewHolder(val itemTodoBinding: ItemTodoBinding) :
+        ViewHolder(itemTodoBinding.root) {
+        fun bind(todoModel: TodoModel) {
+            itemTodoBinding.todoItem = todoModel
+            itemTodoBinding.invalidateAll()
+            itemTodoBinding.executePendingBindings()
+        }
     }
 
 
